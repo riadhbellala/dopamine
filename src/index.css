@@ -1,0 +1,105 @@
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap");
+
+/* ─── Tailwind v4 ──────────────────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+@theme {
+  --color-background:          #F8F5F2;
+  --color-surface:             #F8F5F2;
+  --color-surface-low:         #F0EDE8;
+  --color-surface-container:   #E8E3DC;
+  --color-surface-high:        #DDD8D0;
+  --color-surface-highest:     #D2CCC4;
+  --color-surface-dim:         #C4BEB6;
+  --color-primary:             #6B4F3A;
+  --color-primary-container:   #7D5D46;
+  --color-on-primary:          #ffffff;
+  --color-accent:              #C8A27C;
+  --color-outline:             #9C8E84;
+  --color-outline-variant:     #D8CFC8;
+  --color-on-surface:          #1E1A17;
+  --color-on-surface-variant:  #5C504A;
+  --color-tertiary-fixed:      #F2E4D0;
+  --color-secondary-container: #EADFD6;
+
+  --font-headline: "Playfair Display", Georgia, serif;
+  --font-body:     "Inter", sans-serif;
+
+  --radius-xl:   0.75rem;
+  --radius-2xl:  1rem;
+  --radius-3xl:  1.5rem;
+  --radius-full: 9999px;
+
+  --shadow-warm:    0 16px 48px rgba(107, 79, 58, 0.08);
+  --shadow-warm-md: 0 8px 28px rgba(107, 79, 58, 0.12);
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+    background-color: #F8F5F2;
+    color: #1E1A17;
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { font-family: "Playfair Display", Georgia, serif; }
+}
+
+/* ─── Utilities ────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-headline     { font-family: "Playfair Display", Georgia, serif; }
+  .font-body         { font-family: "Inter", sans-serif; }
+  .ambient-shadow    { box-shadow: 0 16px 48px rgba(107, 79, 58, 0.08); }
+  .ambient-shadow-md { box-shadow: 0 8px 28px rgba(107, 79, 58, 0.12); }
+
+  .glass {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(248, 245, 242, 0.85);
+  }
+
+  .primary-gradient { background: linear-gradient(135deg, #6B4F3A 0%, #8B6550 100%); }
+  .accent-gradient  { background: linear-gradient(90deg, #C8A27C 0%, #956840 100%); }
+  .animate-ticker   { animation: ticker 30s linear infinite; }
+  .animate-float    { animation: float 6s ease-in-out infinite; }
+  .animate-float-slow { animation: float 9s ease-in-out infinite 1s; }
+  .animate-float-slower { animation: float 12s ease-in-out infinite 2s; }
+}
+
+/* ─── Keyframes ────────────────────────────────────────────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(4deg); }
+}
+
+/* ─── Grain texture ────────────────────────────────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}

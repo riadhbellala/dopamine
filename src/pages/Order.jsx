@@ -7,9 +7,10 @@ import useCartStore from '../store/cartStore'
 
 const CATEGORIES = [
   { key: 'all', label: 'All' },
-  { key: 'espresso', label: 'Espresso' },
-  { key: 'signature', label: 'Signature' },
-  { key: 'cold', label: 'Cold' },
+  { key: 'hot', label: 'Hot Drinks' },
+  { key: 'iced', label: 'Iced' },
+  { key: 'sweets', label: 'Sweets' },
+  { key: 'crepes', label: 'Crepes' },
 ]
 
 const SIZES = [
@@ -43,11 +44,13 @@ export default function Order() {
       prev.includes(label) ? prev.filter((e) => e !== label) : [...prev, label]
     )
 
-  const sizeAdj  = SIZES.find((s) => s.key === size)?.adj ?? 0
-  const extrasTotal = extras.reduce(
+  const isDrink = selectedItem && (selectedItem.category === 'hot' || selectedItem.category === 'iced')
+
+  const sizeAdj  = (isDrink && SIZES.find((s) => s.key === size)?.adj) || 0
+  const extrasTotal = isDrink ? extras.reduce(
     (sum, label) => sum + (EXTRAS.find((e) => e.label === label)?.price ?? 0),
     0
-  )
+  ) : 0
   const itemTotal = selectedItem ? selectedItem.price + sizeAdj + extrasTotal : 0
 
   const cartTotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0)
@@ -62,7 +65,11 @@ export default function Order() {
 
   const handleAddToRitual = () => {
     if (!selectedItem) return
-    addItem({ ...selectedItem, size, sugar, extras, price: itemTotal })
+    const cartItemData = isDrink
+      ? { ...selectedItem, size, sugar, extras, price: itemTotal }
+      : { ...selectedItem, price: itemTotal }
+
+    addItem(cartItemData)
     setSelectedItem(null)
     setConfirmed(true)
     setTimeout(() => setConfirmed(false), 2000)
@@ -150,69 +157,74 @@ export default function Order() {
               <div className="space-y-6">
                 <p className="font-headline text-lg text-primary">{selectedItem.name}</p>
 
-                {/* Size */}
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-3">Size</p>
-                  <div className="grid grid-cols-3 gap-3">
-                    {SIZES.map(({ key, label }) => (
-                      <button
-                        key={key}
-                        onClick={() => setSize(key)}
-                        className={`rounded-xl py-2 text-sm font-medium transition-colors cursor-pointer ${
-                          size === key
-                            ? 'bg-primary text-on-primary'
-                            : 'border border-outline-variant text-on-surface hover:border-primary'
-                        }`}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                {/* Show customization options only for drinks */}
+                {isDrink && (
+                  <>
+                    {/* Size */}
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-3">Size</p>
+                      <div className="grid grid-cols-3 gap-3">
+                        {SIZES.map(({ key, label }) => (
+                          <button
+                            key={key}
+                            onClick={() => setSize(key)}
+                            className={`rounded-xl py-2 text-sm font-medium transition-colors cursor-pointer ${
+                              size === key
+                                ? 'bg-primary text-on-primary'
+                                : 'border border-outline-variant text-on-surface hover:border-primary'
+                            }`}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Sugar */}
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-3">Sugar Level</p>
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => setSugar((v) => Math.max(0, v - 1))}
-                      className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary transition-colors cursor-pointer"
-                    >
-                      <Minus size={14} />
-                    </button>
-                    <span className="font-bold w-8 text-center text-primary">{sugar}</span>
-                    <button
-                      onClick={() => setSugar((v) => Math.min(5, v + 1))}
-                      className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary transition-colors cursor-pointer"
-                    >
-                      <Plus size={14} />
-                    </button>
-                    <span className="text-xs text-on-surface-variant">/ 5</span>
-                  </div>
-                </div>
+                    {/* Sugar */}
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-3">Sugar Level</p>
+                      <div className="flex items-center gap-4">
+                        <button
+                          onClick={() => setSugar((v) => Math.max(0, v - 1))}
+                          className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary transition-colors cursor-pointer"
+                        >
+                          <Minus size={14} />
+                        </button>
+                        <span className="font-bold w-8 text-center text-primary">{sugar}</span>
+                        <button
+                          onClick={() => setSugar((v) => Math.min(5, v + 1))}
+                          className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:border-primary transition-colors cursor-pointer"
+                        >
+                          <Plus size={14} />
+                        </button>
+                        <span className="text-xs text-on-surface-variant">/ 5</span>
+                      </div>
+                    </div>
 
-                {/* Extras */}
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-3">Extras</p>
-                  <div className="flex flex-col gap-2">
-                    {EXTRAS.map(({ label, price }) => (
-                      <label
-                        key={label}
-                        className="flex items-center gap-3 p-3 rounded-2xl border border-outline-variant/40 hover:bg-surface-low cursor-pointer transition-colors"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={extras.includes(label)}
-                          onChange={() => toggleExtra(label)}
-                          className="accent-primary w-4 h-4 cursor-pointer"
-                          style={{ accentColor: '#553722' }}
-                        />
-                        <span className="flex-1 text-sm text-on-surface">{label}</span>
-                        <span className="text-xs text-on-surface-variant">+{price}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                    {/* Extras */}
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-on-surface-variant font-bold mb-3">Extras</p>
+                      <div className="flex flex-col gap-2">
+                        {EXTRAS.map(({ label, price }) => (
+                          <label
+                            key={label}
+                            className="flex items-center gap-3 p-3 rounded-2xl border border-outline-variant/40 hover:bg-surface-low cursor-pointer transition-colors"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={extras.includes(label)}
+                              onChange={() => toggleExtra(label)}
+                              className="accent-primary w-4 h-4 cursor-pointer"
+                              style={{ accentColor: '#553722' }}
+                            />
+                            <span className="flex-1 text-sm text-on-surface">{label}</span>
+                            <span className="text-xs text-on-surface-variant">+{price}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 {/* Total + CTA */}
                 <div className="border-t border-outline-variant/20 pt-6">
@@ -249,7 +261,7 @@ export default function Order() {
                     <div key={item.id} className="flex items-center justify-between text-sm">
                       <div>
                         <span className="text-on-surface font-medium">{item.name}</span>
-                        <span className="text-on-surface-variant ml-1">({item.size})</span>
+                        {item.size && <span className="text-on-surface-variant ml-1">({item.size})</span>}
                         <span className="text-on-surface-variant ml-1">×{item.quantity}</span>
                       </div>
                       <div className="flex items-center gap-2">

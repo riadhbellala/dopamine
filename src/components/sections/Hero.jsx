@@ -5,20 +5,20 @@ import menuData from '../../data/menuData'
 
 const FEATURED = [
   {
-    ...menuData.find(d => d.id === 'golden-roast'),
-    tagline: 'A honey-kissed Ethiopian with dark caramel warmth. Your morning deserves this.',
+    ...menuData.find(d => d.id === 'crepe-strike'),
+    tagline: 'The ultimate crispy crêpe. CoffeeStrike\'s most premium sweet creation.',
   },
   {
-    ...menuData.find(d => d.id === 'cloud-latte'),
-    tagline: 'Oat milk and Ethiopian espresso — as light and airy as the morning feels.',
+    ...menuData.find(d => d.id === 'frapp-lotus'),
+    tagline: 'Lotus Biscoff blended with espresso and ice. Our most-requested frappuccino.',
   },
   {
-    ...menuData.find(d => d.id === 'silent-strike'),
-    tagline: 'Double ristretto over black ice. Intense, deliberate, unforgettable.',
+    ...menuData.find(d => d.id === 'coffee-pistachio'),
+    tagline: 'A warm espresso with silky pistachio cream — elegant and unique.',
   },
   {
-    ...menuData.find(d => d.id === 'amber-cold-brew'),
-    tagline: 'Twenty-four hours of patience. One extraordinary cold cup.',
+    ...menuData.find(d => d.id === 'cascada-strike'),
+    tagline: 'Layered chocolate, cream, and espresso in a tall glass. Iconic.',
   },
 ]
 

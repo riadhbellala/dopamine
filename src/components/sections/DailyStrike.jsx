@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import menuData from '../../data/menuData'
 
-const daily = menuData.find(d => d.id === 'golden-roast')
+const daily = menuData.find(d => d.id === 'coffee-pistachio')
 
 export default function DailyStrike() {
   return (
@@ -80,9 +80,9 @@ export default function DailyStrike() {
             {/* Details grid */}
             <div className="grid grid-cols-2 gap-4 mb-10">
               {[
-                { label: 'Origin', value: 'Yirgacheffe, Ethiopia' },
-                { label: 'Process', value: 'Honey-processed' },
-                { label: 'Tasting notes', value: 'Apricot · Dark Caramel' },
+                { label: 'Origin', value: 'House Blend & Pistachio' },
+                { label: 'Process', value: 'Crafted Warmth' },
+                { label: 'Tasting notes', value: 'Roasted Nuts · Smooth Espresso' },
                 { label: 'Price', value: `${daily.price} DZD` },
               ].map(({ label, value }) => (
                 <div key={label} className="bg-surface-low rounded-2xl px-4 py-4">

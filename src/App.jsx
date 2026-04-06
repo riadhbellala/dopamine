@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -34,6 +35,11 @@ function AnimatedPage({ children }) {
 function AppInner() {
   const location = useLocation()
   const isConfirmation = location.pathname === '/confirmation'
+
+  // Auto scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <div className="min-h-screen bg-background">

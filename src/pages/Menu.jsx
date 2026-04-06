@@ -6,9 +6,10 @@ import useCartStore from '../store/cartStore'
 
 const CATEGORIES = [
   { key: 'all',       label: 'All' },
-  { key: 'espresso',  label: 'Espresso' },
-  { key: 'signature', label: 'Signature Drinks' },
-  { key: 'cold',      label: 'Cold Coffee' },
+  { key: 'hot',       label: 'Hot Drinks' },
+  { key: 'iced',      label: 'Iced Drinks' },
+  { key: 'sweets',    label: 'Sweets' },
+  { key: 'crepes',    label: 'Crepes' },
 ]
 
 export default function Menu() {
@@ -88,7 +89,7 @@ export default function Menu() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {filtered.map((item, index) => {
-              const isFeaturedCard = item.isFeatured || (category === 'signature' && index === 0)
+              const isFeaturedCard = item.isFeatured
               return (
                 <motion.div
                   key={item.id}

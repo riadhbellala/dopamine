@@ -24,7 +24,7 @@ export default function Story() {
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5]">
               <img
                 src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800"
-                alt="Coffee Strike bar"
+                alt="Dopamine bar"
                 className="w-full h-full object-cover"
               />
               {/* Warm tint overlay */}
@@ -59,7 +59,7 @@ export default function Story() {
 
             <div className="space-y-5 text-on-surface-variant font-light leading-loose text-base">
               <p>
-                At Coffee Strike, we believe that great coffee is not an accident — it is the result
+                At Dopamine, we believe that great coffee is not an accident — it is the result
                 of intention. From the moment a bean is sourced to the last sip you take, every step
                 is deliberate, every choice considered.
               </p>

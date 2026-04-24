@@ -5,19 +5,19 @@ import menuData from '../../data/menuData'
 
 const FEATURED = [
   {
-    ...menuData.find(d => d.id === 'crepe-strike'),
-    tagline: 'The ultimate crispy crêpe. CoffeeStrike\'s most premium sweet creation.',
+    ...menuData.find(d => d.id === 'crepe-dopamine'),
+    tagline: 'The ultimate crispy crêpe. Dopamine\'s most premium sweet creation.',
   },
   {
     ...menuData.find(d => d.id === 'frapp-lotus'),
     tagline: 'Lotus Biscoff blended with espresso and ice. Our most-requested frappuccino.',
   },
   {
-    ...menuData.find(d => d.id === 'coffee-pistachio'),
-    tagline: 'A warm espresso with silky pistachio cream — elegant and unique.',
+    ...menuData.find(d => d.id === 'coffee-nutella'),
+    tagline: 'Espresso blended with rich Nutella — elegant and unique.',
   },
   {
-    ...menuData.find(d => d.id === 'cascada-strike'),
+    ...menuData.find(d => d.id === 'cascada-dopamine'),
     tagline: 'Layered chocolate, cream, and espresso in a tall glass. Iconic.',
   },
 ]
@@ -85,7 +85,7 @@ export default function Hero() {
         >
           Start Your Day
           <br />
-          <em className="text-accent">With a Strike.</em>
+          <em className="text-accent">With Dopamine.</em>
         </motion.h1>
 
         {/* ── Product image (crossfade) ──────────────────────────────── */}

@@ -241,9 +241,9 @@ export default function Checkout() {
                   >
                     Complete Your Strike
                   </button>
-                  <p className="text-[10px] uppercase tracking-widest text-outline text-center mt-4">
-                    Secure transaction powered by CoffeeStrike
-                  </p>
+                  <span className="text-on-surface-variant/70 text-[10px] uppercase tracking-widest font-bold">
+                    Secure transaction powered by Dopamine
+                  </span>
                 </>
               )}
             </div>

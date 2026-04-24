@@ -70,7 +70,7 @@ const useCartStore = create(
       totalPrice: () =>
         get().items.reduce((sum, i) => sum + i.price * i.quantity, 0),
     }),
-    { name: 'coffeestrike-cart' }
+    { name: 'dopamine-cart' }
   )
 )
 

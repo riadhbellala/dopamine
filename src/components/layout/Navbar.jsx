@@ -42,10 +42,10 @@ export default function Navbar() {
           className="flex items-baseline gap-0.5 hover:opacity-80 transition-opacity duration-200 select-none"
         >
           <span className="font-headline font-bold text-2xl text-primary tracking-tight">
-            Coffee
+            Dopa
           </span>
           <span className="font-headline font-bold text-2xl text-accent tracking-tight">
-            ·Strike
+            mine
           </span>
         </NavLink>
 

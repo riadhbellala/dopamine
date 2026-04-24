@@ -17,10 +17,10 @@ export default function Footer() {
               className="flex items-baseline gap-0.5 hover:opacity-80 transition-opacity duration-200 select-none"
             >
               <span className="font-headline font-bold text-2xl text-primary tracking-tight">
-                Coffee
+                dopa
               </span>
               <span className="font-headline font-bold text-2xl text-accent tracking-tight">
-                ·Strike
+                mine
               </span>
             </NavLink>
 
@@ -76,9 +76,9 @@ export default function Footer() {
         </div>
 
         {/* ── Bottom bar ────────────────────────────────────────────────────────── */}
-        <div className="border-t border-outline-variant/20 mt-12 pt-8 text-center">
-          <p className="text-xs text-outline">
-            © {new Date().getFullYear()} CoffeeStrike. All rights reserved.
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-outline-variant/30 text-sm text-outline">
+          <p>
+            © {new Date().getFullYear()} Dopamine. All rights reserved.
           </p>
         </div>
       </div>

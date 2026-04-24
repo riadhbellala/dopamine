@@ -63,7 +63,7 @@ export default function Confirmation() {
             </div>
             <div>
               <h3 className="font-headline text-xl text-primary mb-2">
-                Pickup at CoffeeStrike Batna
+                Pickup at Dopamine Batna
               </h3>
               <p className="text-on-surface-variant font-light leading-relaxed">
                 Present your order number at the Strike Bar.

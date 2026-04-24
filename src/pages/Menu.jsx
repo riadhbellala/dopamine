@@ -83,23 +83,18 @@ export default function Menu() {
 
       {/* Grid */}
       <div className="px-6 max-w-7xl mx-auto mt-8 pb-24">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={category}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence>
             {filtered.map((item, index) => {
               const isFeaturedCard = item.isFeatured
               return (
                 <motion.div
                   key={item.id}
+                  layout
                   className={isFeaturedCard ? 'md:col-span-2' : ''}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 16 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
                   transition={{ delay: index * 0.05, duration: 0.4 }}
                 >
                   <ProductCard
@@ -110,8 +105,8 @@ export default function Menu() {
                 </motion.div>
               )
             })}
-          </motion.div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Toast */}
